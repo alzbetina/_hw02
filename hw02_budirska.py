@@ -3,9 +3,8 @@ import pandas as pd
 import numpy as np
 
 netflix = pd.read_csv("netflix_titles.tsv", sep="\t")
-netflix.head()
 
-netflix_data = pd.DataFrame(netflix[["PRIMARYTITLE", "STARTYEAR", "GENRES", "DIRECTOR", "CAST"]])
+netflix_data = netflix[["PRIMARYTITLE", "STARTYEAR", "GENRES", "DIRECTOR", "CAST"]]
 
 netflix_data = netflix_data.applymap(lambda x: [] if pd.isna(x) else x)
 
@@ -26,6 +25,6 @@ netflix_data = netflix_data.drop(columns=["year"])
 
 netflix_result = netflix_data.to_dict(orient="records")
 
-with open('hw02_output.json', mode="w", encoding="utf-8") as file:
+with open("hw02_output.json", mode="w", encoding="utf-8") as file:
     json.dump(netflix_result, file, sort_keys=False, ensure_ascii=False, indent=4)
 
